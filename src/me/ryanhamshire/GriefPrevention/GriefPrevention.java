@@ -33,6 +33,7 @@ import static org.spongepowered.api.command.args.GenericArguments.string;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Maps;
 import com.google.inject.Inject;
 import me.ryanhamshire.GriefPrevention.command.CommandAccessTrust;
 import me.ryanhamshire.GriefPrevention.command.CommandAddFlagCmdPermission;
@@ -78,6 +79,7 @@ import me.ryanhamshire.GriefPrevention.command.CommandUnignorePlayer;
 import me.ryanhamshire.GriefPrevention.command.CommandUnlockDrops;
 import me.ryanhamshire.GriefPrevention.command.CommandUnseparate;
 import me.ryanhamshire.GriefPrevention.command.CommandUntrust;
+import me.ryanhamshire.GriefPrevention.configuration.ClaimStorageData;
 import me.ryanhamshire.GriefPrevention.configuration.GriefPreventionConfig;
 import me.ryanhamshire.GriefPrevention.configuration.GriefPreventionConfig.DimensionConfig;
 import me.ryanhamshire.GriefPrevention.configuration.GriefPreventionConfig.GlobalConfig;
@@ -457,7 +459,7 @@ public class GriefPrevention {
                         CommandSpec.builder().description(Text.of("Gets/Sets various claim flags in the claim you are standing in"))
                                 .permission(GPPermissions.COMMAND_CLAIMFLAG)
                                 .arguments(GenericArguments.firstParsing(GenericArguments.flags().flag("-r", "r")
-                                        .buildWith(GenericArguments.seq(optional(onlyOne(string(Text.of("flag")))),
+                                        .buildWith(GenericArguments.seq(GenericArguments.choices(Text.of("flag"), Maps.toMap(ClaimStorageData.FLAGS, k -> k)),
                                                 optional(onlyOne(GenericArguments.remainingJoinedStrings(Text.of("value"))))))))
                                 .executor(new CommandClaimFlag(GPPermissions.COMMAND_CLAIMFLAG)).build());
 

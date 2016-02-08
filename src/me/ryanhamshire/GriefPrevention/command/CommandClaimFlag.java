@@ -29,7 +29,7 @@ public class CommandClaimFlag extends BaseCommand {
 
     @Override
     public CommandResult execute(CommandSource src, CommandContext ctx) {
-        Optional<String> flag = ctx.<String>getOne("flag");
+        String flag = ctx.<String>getOne("flag").get();
         Optional<String> value = ctx.<String>getOne("value");
 
         Player player;
@@ -44,24 +44,24 @@ public class CommandClaimFlag extends BaseCommand {
         Claim claim = GriefPrevention.instance.dataStore.getClaimAt(player.getLocation(), false, playerData.lastClaim);
 
         if (claim != null) {
-            if (flag.isPresent() && value.isPresent()) {
-                if (player.hasPermission(this.basePerm + "." + flag.get().toLowerCase())) {
+            if (value.isPresent()) {
+                if (player.hasPermission(this.basePerm + "." + flag.toLowerCase())) {
                     if (value.get().equalsIgnoreCase("true") || value.get().equalsIgnoreCase("false")) {
-                        setFlagValue(src, claim, flag.get(), Boolean.valueOf(value.get()));
+                        setFlagValue(src, claim, flag, Boolean.valueOf(value.get()));
                     } else if (value.get().contains(",") && !ctx.hasAny("r")) {
                         ArrayList<String> input = Lists.newArrayList();
                         input.addAll(Arrays.asList(value.get().split("\\s*,\\s*")));
-                        setFlagValue(src, claim, flag.get(), input);
+                        setFlagValue(src, claim, flag, input);
                     } else if (value.get().contains(",") && ctx.hasAny("r")) {
                         ArrayList<String> input = Lists.newArrayList();
                         input.addAll(Arrays.asList(value.get().split("\\s*,\\s*")));
-                        removeFromFlagValue(src, claim, flag.get(), input);
+                        removeFromFlagValue(src, claim, flag, input);
                     } else if (ctx.hasAny("r")) {
                         ArrayList<String> input = Lists.newArrayList();
                         input.add(value.get());
-                        removeFromFlagValue(src, claim, flag.get(), input);
+                        removeFromFlagValue(src, claim, flag, input);
                     } else {
-                        setFlagValue(src, claim, flag.get(), value.get());
+                        setFlagValue(src, claim, flag, value.get());
                     }
                 } else {
                     GriefPrevention.sendMessage(src, Text.of(TextMode.Err, "No permission to use this flag."));

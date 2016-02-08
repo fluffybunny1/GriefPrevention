@@ -1,5 +1,7 @@
 package me.ryanhamshire.GriefPrevention.configuration;
 
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Maps;
 import com.google.common.reflect.TypeToken;
 import me.ryanhamshire.GriefPrevention.GriefPrevention;
@@ -83,6 +85,38 @@ public class ClaimStorageData {
     public static final String FLAGS_SPAWN_PASSIVES = "spawn-passives";
     public static final String FLAGS_SPAWN_MONSTERS = "spawn-monsters";
     public static final String FLAGS_WATER_FLOW = "water-flow";
+
+    public static final ImmutableSet<String> FLAGS = ImmutableSet.of(
+            FLAGS_BLOCK_PLACE,
+            FLAGS_BLOCK_BREAK,
+            FLAGS_INTERACT_PRIMARY,
+            FLAGS_INTERACT_SECONDARY,
+            FLAGS_INVENTORY,
+            FLAGS_EXPLOSIONS,
+            FLAGS_IGNITE,
+            FLAGS_MOB_BLOCK_DAMAGE,
+            FLAGS_MOB_PLAYER_DAMAGE,
+            FLAGS_MOB_RIDING,
+            FLAGS_ITEM_DROP,
+            FLAGS_ITEM_PICKUP,
+            FLAGS_ITEM_USE,
+            FLAGS_PORTAL_USE,
+            FLAGS_PVP,
+            FLAGS_SPAWN_MONSTERS,
+            FLAGS_SPAWN_PASSIVES,
+            FLAGS_SPAWN_AMBIENTS,
+            FLAGS_SPAWN_AQUATICS,
+            FLAGS_SPAWN_ANY,
+            FLAGS_SLEEP,
+            FLAGS_WATER_FLOW,
+            FLAGS_LAVA_FLOW,
+            FLAGS_FIRE_SPREAD,
+            FLAGS_BLOCK_COMMANDS,
+            FLAGS_PROJECTILES_PLAYER,
+            FLAGS_PROJECTILES_MONSTER,
+            FLAGS_PROJECTILES_ANY,
+            FLAGS_FORCE_DENY_ALL
+    );
 
     @SuppressWarnings({"unchecked", "rawtypes"})
     public ClaimStorageData(Path path) {
